@@ -7,11 +7,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static unit.BaseBallGame.*;
 
 public class ApplicationTest {
@@ -38,5 +35,25 @@ public class ApplicationTest {
 			assertThat(num < 10 &&  num > 0).isTrue();
 		}
 	}
+	
+	@Test
+	@DisplayName("userInputNumbers가 서로 다른 3자리 수인지 테스트")
+	void userInputNumbersTest() {
+		int input = 123;
+		ArrayList<Integer> userInputNumbers = makeUserInputNumbers(input);
+		assertThat(userInputNumbers.size() == userInputNumbers.stream().distinct().count()).isTrue();
+		assertThat(userInputNumbers.size() == 3).isTrue();
+		
+		input = 113;
+		userInputNumbers = makeUserInputNumbers(input);
+		assertThat(userInputNumbers.size() == userInputNumbers.stream().distinct().count()).isFalse();
+		assertThat(userInputNumbers.size() == 3).isTrue();
+		
+		input = 1023;
+		userInputNumbers = makeUserInputNumbers(input);
+		assertThat(userInputNumbers.size() == userInputNumbers.stream().distinct().count()).isTrue();
+		assertThat(userInputNumbers.size() == 3).isFalse();
+	}
+
 	
 }
