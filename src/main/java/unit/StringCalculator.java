@@ -13,21 +13,19 @@ public class StringCalculator {
 		String[] values = value.split(" ");
 		this.values = values;
 	}
-
-	int calc() {
-		for (String op : values) {
-			if (op.matches("[^0-9]")) {
-				this.operator = op;
-			}
-
-			if (op.matches("[0-9]+")) {
-				checkOperaterAndCalc(Integer.parseInt(op));
-			}
+	
+	void isOperator(String op) {
+		if (op.matches("[^0-9]")) {
+			this.operator = op;
 		}
-		
-		return result;
 	}
-
+	
+	void isOperand(String op) {
+		if (op.matches("[0-9]+")) {
+			checkOperaterAndCalc(Integer.parseInt(op));
+		}
+	}
+	
 	void checkOperaterAndCalc(int operand) {
 		if (this.operator.equals("+")) {
 			add(operand);
@@ -61,5 +59,13 @@ public class StringCalculator {
 
 	void div(int num) {
 		result /= num;
+	}
+
+	int calc() {
+		for (String op : values) {
+			isOperator(op);
+			isOperand(op);
+		}
+		return result;
 	}
 }
