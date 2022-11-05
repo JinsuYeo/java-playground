@@ -1,7 +1,6 @@
 package unit;
 
 import java.util.Scanner;
-import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,14 +12,16 @@ public class BaseBallGame {
 		while(true) {
 			System.out.println("숫자 야구 게임을 시작합니다.");
 			baseBallGame(scanner);
+			break;
 		}
 	}
 	
-	private static ArrayList<Integer> makeUserInputNumbers(int inputNum) {
+	public static ArrayList<Integer> makeUserInputNumbers(int inputNum) {
 		ArrayList<Integer> userInputNumbers = new ArrayList<>();
-		while(inputNum > 0) {
-			userInputNumbers.add(0, inputNum % 10);
-			inputNum /= 10;
+		int num = inputNum;
+		while(num != 0) {
+			userInputNumbers.add(0, num % 10);
+			num /= 10;
 		}
 		return  userInputNumbers;
 	}
@@ -36,7 +37,9 @@ public class BaseBallGame {
 			userInputNumbers = makeUserInputNumbers(inputNum);
 			checkIllegalInput(userInputNumbers);
 			compare();
+			break;
 		}
+		return true;
 	}
 
 	private static void checkIllegalInput(ArrayList<Integer> userInputNumbers) {
@@ -52,11 +55,11 @@ public class BaseBallGame {
 		}
 	}
 
-	private static boolean isDuplicated(ArrayList<Integer> numbers, int number) {
-		if(number == 0) return true;
-		ArrayList<Integer> numbersNotAddedRandomNumber = numbers;
-		numbers.add(number);
-		if(numbersNotAddedRandomNumber.size() == numbers.stream().distinct().count()) {
+	private static boolean isDuplicated(ArrayList<Integer> randomNumbers, int randomNumber) {
+		if(randomNumber == 0) return true;
+		ArrayList<Integer> randomNumbersNotAddedRandomNumber = randomNumbers;
+		randomNumbers.add(randomNumber);
+		if(randomNumbersNotAddedRandomNumber.size() != randomNumbers.stream().distinct().count()) {
 			return false;
 		}
 		return true;

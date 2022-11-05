@@ -12,6 +12,7 @@ public class StringCalculator {
 		String value = scanner.nextLine();
 		String[] values = value.split(" ");
 		this.values = values;
+		scanner.close();
 	}
 	
 	void isOperator(String op) {
