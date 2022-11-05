@@ -1,6 +1,7 @@
 package unit;
 
 import java.util.Scanner;
+import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,17 +16,47 @@ public class BaseBallGame {
 		}
 	}
 	
-	public static boolean baseBallGame(Scanner scanner) {
-		while(true) {
-			
+	private static ArrayList<Integer> makeUserInputNumbers(int inputNum) {
+		ArrayList<Integer> userInputNumbers = new ArrayList<>();
+		while(inputNum > 0) {
+			userInputNumbers.add(0, inputNum % 10);
+			inputNum /= 10;
 		}
+		return  userInputNumbers;
 	}
 	
-	private static boolean isDuplicated(ArrayList<Integer> randomNumbers, int randomNumber) {
-		if(randomNumber == 0) return true;
-		ArrayList<Integer> randomNumbersNotAddedRandomNumber = randomNumbers;
-		randomNumbers.add(randomNumber);
-		if(randomNumbersNotAddedRandomNumber.size() == randomNumbers.stream().distinct().count()) {
+	private static void compare() {
+		
+	}
+	
+	public static boolean baseBallGame(Scanner scanner) {
+		while(true) {
+			System.out.println("숫자를 입력해 주세요 : ");
+			int inputNum = scanner.nextInt();
+			userInputNumbers = makeUserInputNumbers(inputNum);
+			checkIllegalInput(userInputNumbers);
+			compare();
+		}
+	}
+
+	private static void checkIllegalInput(ArrayList<Integer> userInputNumbers) {
+		if(userInputNumbers.size() != userInputNumbers.stream().distinct().count()) exit();
+		if(userInputNumbers.size() != 3 || userInputNumbers.contains(0)) exit();
+	}
+	
+	public static void exit() {
+		try{
+			throw new IllegalArgumentException();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static boolean isDuplicated(ArrayList<Integer> numbers, int number) {
+		if(number == 0) return true;
+		ArrayList<Integer> numbersNotAddedRandomNumber = numbers;
+		numbers.add(number);
+		if(numbersNotAddedRandomNumber.size() == numbers.stream().distinct().count()) {
 			return false;
 		}
 		return true;
