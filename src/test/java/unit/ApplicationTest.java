@@ -1,7 +1,5 @@
 package unit;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -10,15 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static unit.BaseBallGame.*;
+import static unit.ResultView.*;
+import static unit.InputView.*;
 
 public class ApplicationTest {
-	@BeforeEach
-	void init() {
-		String input = "123";
-		InputStream in = new ByteArrayInputStream(input.getBytes());
-		System.setIn(in);
-	}
-	
 	@Test
 	@DisplayName("randomNumbers가 서로 다른 3자리 수인지 테스트")
 	void makerandomNumbersTest() {
@@ -54,6 +47,20 @@ public class ApplicationTest {
 		assertThat(userInputNumbers.size() == userInputNumbers.stream().distinct().count()).isTrue();
 		assertThat(userInputNumbers.size() == 3).isFalse();
 	}
-
 	
+	@Test	
+	@DisplayName("두 수 비교하여 stike 테스트")
+	void  strikeTest() {
+		assertThat(BaseBallGame.isStrike(1, 1)).isTrue();
+		assertThat(BaseBallGame.isStrike(1, 2)).isFalse();
+	}
+	
+	@Test	
+	@DisplayName("두 수 비교하여 ball 테스트")
+	void  ballTest() {
+		ArrayList<Integer> test = new ArrayList<Integer>();
+		test.add(7); test.add(1); test.add(3);
+		assertThat(BaseBallGame.isBall(test, 1)).isTrue();
+		assertThat(BaseBallGame.isBall(test, 2)).isFalse();
+	}
 }

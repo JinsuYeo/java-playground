@@ -66,7 +66,7 @@ public class BaseBallGame {
 	}
 
 	
-	private static boolean isStrike(Integer randomNum, Integer userInputNum) {
+	static boolean isStrike(Integer randomNum, Integer userInputNum) {
 		if(randomNum == userInputNum) {
 			strike++;
 			return true;
@@ -74,8 +74,12 @@ public class BaseBallGame {
 		return false;
 	}
 
-	private static void isBall(ArrayList<Integer> randomNumbers, Integer userInputNum) {
-		if(randomNumbers.contains(userInputNum)) ball++;
+	static boolean isBall(ArrayList<Integer> randomNumbers, Integer userInputNum) {
+		if(randomNumbers.contains(userInputNum))  {
+			ball++;
+			return true;
+		}
+		return false;
 	}
 
 	@SuppressWarnings("unchecked")
