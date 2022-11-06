@@ -4,11 +4,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static unit.ResultView.*;
+import static unit.InputView.*;
+
 public class BaseBallGame {	
-	private static ArrayList<Integer> randomNumbers;
-	private static ArrayList<Integer> userInputNumbers;
-	private static int strike = 0;
-	private static int ball = 0;
+	static ArrayList<Integer> randomNumbers;
+	static ArrayList<Integer> userInputNumbers;
+	static int strike = 0;
+	static int ball = 0;
 	
 	public static void initBaseBallGame() {
 		userInputNumbers = null;
@@ -27,26 +30,18 @@ public class BaseBallGame {
 
 	public static boolean baseBallGame(Scanner scanner) {
 		boolean restartGame = false;
+		initBaseBallGame();
 		while(!isThreeStrike()) {
+			initBaseBallGame();
 			System.out.print("숫자를 입력해 주세요 : ");
 			int inputNum = scanner.nextInt();
 			userInputNumbers = makeUserInputNumbers(inputNum);
 			checkIllegalInput(userInputNumbers);
 			compare();
 			printOutResult();
-			initBaseBallGame();
 		}
 		restartGame = restartOrExit(scanner);
 		return restartGame;
-	}
-
-	private static boolean restartOrExit(Scanner scanner) {
-		System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-		int input = scanner.nextInt();
-		if(input == 1) return true;
-		if(input == 2) return false;
-		exit();
-		return false;
 	}
 
 	public static ArrayList<Integer> makeUserInputNumbers(int inputNum) {
@@ -59,7 +54,7 @@ public class BaseBallGame {
 		return  userInputNumbers;
 	}
 	
-	private static void compare() {
+	static void compare() {
 		for(int i = 0; i < 3; i++) {
 			strikeOrBall(i);
 		}
@@ -83,24 +78,12 @@ public class BaseBallGame {
 		if(randomNumbers.contains(userInputNum)) ball++;
 	}
 
-	private static void checkIllegalInput(ArrayList<Integer> userInputNumbers) {
-		if(userInputNumbers.size() != userInputNumbers.stream().distinct().count()) exit();
-		if(userInputNumbers.size() != 3 || userInputNumbers.contains(0)) exit();
-	}
-	
-	public static void exit() {
-		try{
-			throw new IllegalArgumentException();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	@SuppressWarnings("unchecked")
 	private static boolean isDuplicated(ArrayList<Integer> randomNumbers, int randomNumber) {
 		if(randomNumber == 0) return true;
-		ArrayList<Integer> randomNumbersNotAddedRandomNumber = randomNumbers;
-		randomNumbers.add(randomNumber);
-		if(randomNumbersNotAddedRandomNumber.size() != randomNumbers.stream().distinct().count()) {
+		ArrayList<Integer> randomNumbersAddedRandomNumber = (ArrayList<Integer>)randomNumbers.clone();
+		randomNumbersAddedRandomNumber.add(randomNumber);
+		if(randomNumbers.size() != randomNumbersAddedRandomNumber.stream().distinct().count()) {
 			return false;
 		}
 		return true;
@@ -121,36 +104,6 @@ public class BaseBallGame {
 		}
 		
 		return randomNumbers;
-	}
-	
-	private static void printOutResult() {
-		if(strike == 0 && ball == 0) {
-			System.out.println("낫싱");
-			return;
-		}
-		
-		if(strike > 0 && ball > 0) {
-			System.out.printf("%d볼 %d스트라이크\n", ball, strike);
-			return;
-		}
-		
-		if(strike > 0 && ball == 0) {
-			System.out.printf("%d스트라이크\n", strike);
-			return;
-		}
-		
-		if(ball > 0 && strike == 0) {
-			System.out.printf("%d볼\n", ball);
-			return;
-		}
-	}
-	
-	private static boolean isThreeStrike() {
-		if(strike == 3) {
-			System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-			return true;
-		}
-		return false;
 	}
 	
 	public static void main(String[] args) {
