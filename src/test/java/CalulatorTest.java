@@ -13,6 +13,8 @@ public class CalulatorTest {
     @Test
     void 구분자_테스트() {
         assertThat(Calculator.isDelimeter(":")).isTrue();
+        assertThat(Calculator.isDelimeter(",")).isTrue();
+        assertThat(Calculator.isDelimeter(".")).isFalse();
     }
 
 }
