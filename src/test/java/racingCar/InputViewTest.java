@@ -31,7 +31,15 @@ public class InputViewTest {
     void 자동차_이름_배열_생성_테스트() {
         assertThat(InputView.createCarNames(validDelimeterNames)).isEqualTo(Arrays.asList("pobi","crong","honux"));
         assertThatThrownBy(() -> {
-            assertThat(InputView.createCarNames(notValidDelimeterNames));
+            InputView.createCarNames(notValidDelimeterNames);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @Description("배열의 자동차 이름 길이가 5자 이내가 아니면 예외 발생하는지 테스트")
+    void 배열_자동차_이름_길이_테스트() {
+        assertThatThrownBy(() -> {
+            InputView.checkCarNames(Arrays.asList("pobi", "honux", "jinsoo"));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
