@@ -40,9 +40,15 @@ public class GameController {
         return attempt;
     }
 
+    private static void runCarGame(List<String> carNames, int attempt) {
+        CarGame carGame = new CarGame(carNames);
+        for(int i = 0; i < attempt; i++) {
+            carGame.moveCar();
+        }
+    }
+
     public static void main(String[] args) {
-        List<String> carNames = receiveValidCarNames();
-        int attempt = receiveValidNumberOfAttempts();
+        runCarGame(receiveValidCarNames(), receiveValidNumberOfAttempts());
         InputView.closeScanner();
     }
 }
