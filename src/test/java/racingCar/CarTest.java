@@ -13,7 +13,7 @@ public class CarTest {
 
     @BeforeEach
     void init() {
-        this.car = new Car();
+        this.car = new Car("pobi");
     }
 
     @Test

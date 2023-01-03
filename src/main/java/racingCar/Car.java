@@ -1,12 +1,12 @@
 package racingCar;
 
 public class Car {
+    private String name;
     private int moving;
-    private Engine engine;
 
-    public Car() {
+    public Car(String name) {
+        this.name = name;
         this.moving = 0;
-        this.engine = new Engine();
     }
 
     public boolean isMoved(int value) {
@@ -21,5 +21,9 @@ public class Car {
 
     public int countMoving() {
         return this.moving;
+    }
+
+    public String getName() {
+        return name;
     }
 }
