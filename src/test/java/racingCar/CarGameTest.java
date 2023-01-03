@@ -26,4 +26,13 @@ public class CarGameTest {
         carsGame.moveCar(4);
         assertThat(carsGame.getMovingResult()).isEqualTo(Arrays.asList("--" ,"--", "--"));
     }
+
+    @Test
+    @Description("우승자가 올바르게 선택되는지 테스트")
+    void 우승자_테스트() {
+        carGame.moveCar(4);
+        assertThat(carGame.getWinner()).isEqualTo(Arrays.asList("pobi"));
+        carsGame.moveCar(4);
+        assertThat(carsGame.getWinner()).isEqualTo(Arrays.asList("pobi", "honux", "crong"));
+    }
 }
