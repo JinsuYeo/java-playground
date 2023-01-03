@@ -31,6 +31,14 @@ public class CarGame {
         });
     }
 
+    public List<String> getCarNames() {
+        List<String> carNames = new ArrayList<String>();
+        cars.stream().forEach(car -> {
+            carNames.add(car.getName());
+        });
+        return carNames;
+    }
+
     public List<String> getMovingResult() {
         List<String> movingResult = new ArrayList<String>();
         cars.stream().forEach(car -> {
@@ -41,5 +49,17 @@ public class CarGame {
             movingResult.add(moveString);
         });
         return movingResult;
+    }
+
+    public List<String> getWinner() {
+        int maxMoving = cars.stream()
+                .map(car -> car.countMoving())
+                .mapToInt(i -> i)
+                .max()
+                .orElseThrow(NoSuchElementException::new);
+        return cars.stream()
+                .filter(car -> car.countMoving() == maxMoving)
+                .map(car -> car.getName())
+                .collect(Collectors.toList());
     }
 }
