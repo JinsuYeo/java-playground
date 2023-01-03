@@ -24,7 +24,7 @@ public class CarGameTest {
         carGame.moveCar(4);
         assertThat(carGame.getMovingResult()).isEqualTo(Arrays.asList("--"));
         carsGame.moveCar(4);
-        assertThat(carsGame.getMovingResult()).isEqualTo(Arrays.asList("--" ,"--", "--"));
+        assertThat(carsGame.getMovingResult()).isEqualTo(Arrays.asList("--", "--", "--"));
     }
 
     @Test

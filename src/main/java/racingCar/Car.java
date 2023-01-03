@@ -14,7 +14,7 @@ public class Car {
     }
 
     public void move(int value) {
-        if(value >= 4) {
+        if (value >= 4) {
             this.moving++;
         }
     }

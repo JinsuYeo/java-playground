@@ -23,13 +23,13 @@ public class InputViewTest {
     @Test
     @Description("입력된 문자열을 쉼표 기준으로 구분할 수 있는지 테스트")
     void 입력_문자열_split_테스트() {
-        assertThat(InputView.splitNames(validDelimeterNames)).isEqualTo(Arrays.asList("pobi","crong","honux"));
+        assertThat(InputView.splitNames(validDelimeterNames)).isEqualTo(Arrays.asList("pobi", "crong", "honux"));
     }
 
     @Test
     @Description("입력된 문자열이 유효할 때, 자동차 이름 배열로 변환되는지 테스트(아닐 경우 예외 발생)")
     void 자동차_이름_배열_생성_테스트() {
-        assertThat(InputView.createCarNames(validDelimeterNames)).isEqualTo(Arrays.asList("pobi","crong","honux"));
+        assertThat(InputView.createCarNames(validDelimeterNames)).isEqualTo(Arrays.asList("pobi", "crong", "honux"));
         assertThatThrownBy(() -> {
             InputView.createCarNames(notValidDelimeterNames);
         }).isInstanceOf(IllegalArgumentException.class);

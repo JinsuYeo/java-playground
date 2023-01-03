@@ -16,8 +16,8 @@ public class ResultView {
 
     private static String makeWinnerName(List<String> winners) {
         String winnerName = "";
-        for(int i = 0; i < winners.size(); i++) {
-            if(i == winners.size() - 1) {
+        for (int i = 0; i < winners.size(); i++) {
+            if (i == winners.size() - 1) {
                 winnerName += winners.get(i);
                 break;
             }

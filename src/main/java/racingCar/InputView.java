@@ -21,7 +21,7 @@ public class InputView {
     }
 
     public static void checkCarNames(List<String> carNames) throws IllegalArgumentException {
-        if(carNames.stream().anyMatch(name -> !isValidLength(name))) {
+        if (carNames.stream().anyMatch(name -> !isValidLength(name))) {
             throw new IllegalArgumentException("자동차 이름은 5자 이내여야 합니다.");
         }
     }
