@@ -30,25 +30,27 @@ public class GameController {
 
     private static List<String> receiveValidCarNames() {
         List<String> carNames = null;
-        while((carNames = receiveCarNames()) == null);
+        while ((carNames = receiveCarNames()) == null) ;
         return carNames;
     }
 
     private static int receiveValidNumberOfAttempts() {
         int attempt = 0;
-        while ((attempt = receiveNumberOfAttempts()) == 0);
+        while ((attempt = receiveNumberOfAttempts()) == 0) ;
         return attempt;
     }
 
-    private static void runCarGame(List<String> carNames, int attempt) {
-        CarGame carGame = new CarGame(carNames);
-        for(int i = 0; i < attempt; i++) {
+    private static void runCarGame(CarGame carGame, int attempt) {
+        System.out.println("실행 결과");
+        for (int i = 0; i < attempt; i++) {
             carGame.moveCar();
+            ResultView.printCarMoving(carGame.getCarNames(), carGame.getMovingResult());
         }
+        ResultView.printWinner(carGame.getWinner());
     }
 
     public static void main(String[] args) {
-        runCarGame(receiveValidCarNames(), receiveValidNumberOfAttempts());
+        runCarGame(new CarGame(receiveValidCarNames()), receiveValidNumberOfAttempts());
         InputView.closeScanner();
     }
 }

@@ -17,7 +17,7 @@ public class CarGame {
     }
 
     private void makeCars(List<String> carNames) {
-        for(String carName : carNames) {
+        for (String carName : carNames) {
             cars.add(new Car(carName));
         }
     }
@@ -57,7 +57,7 @@ public class CarGame {
 
     private String makeMoveString(Car car) {
         String moveString = "-";
-        for(int i = 0; i < car.countMoving(); i++) {
+        for (int i = 0; i < car.countMoving(); i++) {
             moveString += "-";
         }
         return moveString;
