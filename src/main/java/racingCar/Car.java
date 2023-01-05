@@ -2,11 +2,11 @@ package racingCar;
 
 public class Car {
     private String name;
-    private int moving;
+    private int position;
 
     public Car(String name) {
         this.name = name;
-        this.moving = 0;
+        this.position = 0;
     }
 
     public boolean isMoved(int value) {
@@ -15,12 +15,12 @@ public class Car {
 
     public void move(int value) {
         if (value >= 4) {
-            this.moving++;
+            this.position++;
         }
     }
 
     public int countMoving() {
-        return this.moving;
+        return this.position;
     }
 
     public String getName() {

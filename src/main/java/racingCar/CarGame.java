@@ -29,7 +29,7 @@ public class CarGame {
 
     public void moveCar() {
         cars.stream().forEach(car -> {
-            car.move(random.nextInt(9));
+            car.move(random.nextInt(10));
         });
     }
 
