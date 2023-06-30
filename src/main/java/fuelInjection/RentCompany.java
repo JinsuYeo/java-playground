@@ -1,22 +1,35 @@
 package fuelInjection;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RentCompany {
+
+    private List<Car> cars;
 
     private static final String NEWLINE = System.getProperty("line.separator");
     public static RentCompany create() {
-        return new RentCompany();
+        RentCompany rentCompany = new RentCompany();
+        rentCompany.cars = new ArrayList<>();
+        return rentCompany;
     }
 
-    public void addCar(car sonata) {
+    public void addCar(Car car) {
+        this.cars.add(car);
     }
 
     public String generateReport() {
 
-        return "Sonata : 15리터" + NEWLINE +
-                "K5 : 20리터" + NEWLINE +
-                "Sonata : 12리터" + NEWLINE +
-                "Avante : 20리터" + NEWLINE +
-                "K5 : 30리터" + NEWLINE;
+        String report = "";
+        for(Car car : cars) {
+            report += getReport(car);
+        }
+
+        return report;
+    }
+
+    private String getReport(Car car) {
+        return car.getName() + " : " + (int)car.getChargeQuantity() + "리터" + NEWLINE;
     }
 }
 
